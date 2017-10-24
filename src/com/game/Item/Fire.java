@@ -9,10 +9,10 @@ package com.game.Item;
  * 异火
  */
 public class Fire {
-    String name;
-    String note;
-    double exp;
-    boolean live;
+    private String name;
+    private String note;
+    private double exp;
+    private boolean live;
 
     public String getName() {
         return name;
@@ -53,7 +53,7 @@ public class Fire {
         live=true;
         name="基础火焰";
         note="随处可见的普通火焰";
-        exp=1.0;
+        exp=10.0;
     }
 
     @Override

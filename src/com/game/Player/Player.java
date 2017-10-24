@@ -21,27 +21,26 @@ public class Player {
         return lev;
     }
 
-    public void setLev(Level lev) {
+    private void setLev(Level lev) {
         this.lev = lev;
     }
 
     /**
      * 吸收火焰
-     * @param fire
+     * @param fire 异火
      */
     public void eatFire(Fire fire){
         if(fire.isLive()){
-           lev.setExpPool(lev.getExpPool()+fire.getExp());
-            fire.setLive(false);
+           lev.suckEXP(fire.getExp());
+           fire.setLive(false);
         }
-        lev.genLev();
     }
 
     /**
      * 获取玩家的基础信息
      */
     public void getBasicInfo(){
-        System.out.println("玩家现在的评级："+lev.getName()+"|经验池："+lev.getExpPool());
+        System.out.println("玩家现在的评级："+lev.getName()+"|经验池："+lev.getExpPool()+"/"+lev.getExpLimit());
     }
 
     @Override

@@ -23,9 +23,10 @@ public class GameController {
         p.eatFire(f);
         p.getBasicInfo();
 
-        System.out.println("接着使用十团基础火焰:"+f.getName()+"|"+f.getNote());
-        for (int i=0;i<10;i++){
-            p.eatFire(f);
+        System.out.println("接着使用300团基础火焰:"+f.getName()+"|"+f.getNote());
+        for (int i=0;i<300;i++){
+            Fire a=new Fire();
+            p.eatFire(a);
         }
         p.getBasicInfo();
 
