@@ -1,6 +1,5 @@
 package com.game.Player;
 
-import com.game.Common.Level;
 import com.game.Item.Fire;
 
 /**

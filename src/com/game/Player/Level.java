@@ -1,9 +1,11 @@
-package com.game.Common;
+package com.game.Player;
 
 /**
  * edited by AndersonKim
  * at 2017/10/23
  */
+
+import com.game.Common.GlobalConstance;
 
 /**
  * 所有的物品以及人物公用的等级机制
@@ -59,7 +61,7 @@ public class Level {
      */
     public void suckEXP(double exp){
         //是否算是高等级玩家
-        if (levels<GlobalConstance.LOW_HIGH_DIVIDE){
+        if (levels< GlobalConstance.LOW_HIGH_DIVIDE){
             expLimit=GlobalConstance.LOW_LEVEL_EXP_POOL;
         }else {
             expLimit=GlobalConstance.HIGH_LEVEL_EXP_POOL;
