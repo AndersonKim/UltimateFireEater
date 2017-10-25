@@ -1,4 +1,4 @@
-package com.game.Player;
+package com.game.Character;
 
 /**
  * edited by AndersonKim
