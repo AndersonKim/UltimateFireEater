@@ -2,6 +2,7 @@ package com.game;
 
 import com.game.Item.Fire;
 import com.game.Character.Player;
+import com.game.Item.RankStone;
 
 /**
  * edited by AndersonKim
@@ -21,13 +22,17 @@ public class GameController {
 
         System.out.println("使用一团基础火焰:"+f.getName()+"|"+f.getNote());
         p.eatFire(f);
+        System.out.println("验魔石碑:"+RankStone.testRank(p));
         p.getBasicInfo();
+
+
 
         System.out.println("接着使用300团基础火焰:"+f.getName()+"|"+f.getNote());
         for (int i=0;i<300;i++){
             Fire a=new Fire();
             p.eatFire(a);
         }
+        System.out.println("验魔石碑:"+RankStone.testRank(p));
         p.getBasicInfo();
 
     }
