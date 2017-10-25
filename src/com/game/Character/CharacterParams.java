@@ -5,7 +5,7 @@ public class CharacterParams {
 
     private static final int DEFAULT_MAXHP=100;
     private static final int DEFAULT_MAXMP=30;
-    private static final int DEFAULT_MAXSP=10;
+    private static final int DEFAULT_MAXSP=0;
 
     private int MaxHp;
     private int MaxMp;
