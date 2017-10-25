@@ -1,7 +1,7 @@
 package com.game;
 
 import com.game.Item.Fire;
-import com.game.Player.Player;
+import com.game.Character.Player;
 
 /**
  * edited by AndersonKim

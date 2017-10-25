@@ -1,4 +1,4 @@
-package com.game.Player;
+package com.game.Character;
 
 import com.game.Common.Level;
 import com.game.Item.Fire;
