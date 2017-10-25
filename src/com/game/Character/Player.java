@@ -11,9 +11,11 @@ import com.game.Item.Fire;
 /**
  * 玩家
  */
-public class Player {
+public class Player extends Character{
     private Level lev;
+
     public Player(){
+        super();
         lev=new Level();
     }
 
