@@ -7,11 +7,20 @@ package com.game.Item;
 
 /**
  * 功法
- * 通常可以修改玩家的基础属性
+ * 通常可以修改玩家的基础属性以及吸收灵气的速度
  */
 public class Gest extends GestLevel{
     String name;
     String info;
+    double speed;
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
 
     public String getName() {
         return name;

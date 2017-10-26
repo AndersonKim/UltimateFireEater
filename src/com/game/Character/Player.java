@@ -64,6 +64,20 @@ public class Player extends Character{
     }
 
     /**
+     * 运行功法吸收的经验值
+     * @param timeSpan 修炼的时间长度
+     */
+    public void runGest(int timeSpan){
+        double sum=0;
+        for(Gest g:gests){
+            sum+=g.getSpeed();
+        }
+        lev.suckEXP(sum);
+    }
+
+
+
+    /**
      * 根据玩家的当前状态来更新基础属性
      * todo 根据玩家的属性(CharacterParams)来决定功法(Gest)怎么搞
      */
