@@ -20,7 +20,7 @@ public class RankStone {
      */
     public static String testRank(Player player){
         if (player.getLev().getLevels()>1){
-            return "验魔石碑陈受不住能量继而炸裂开来";
+            return "验魔石碑承受不住能量继而炸裂开来";
         }else{
             int r=(int)player.getLev().getExpPool()/20;
             String info=r>4?"高级":"低级";

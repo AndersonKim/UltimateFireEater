@@ -1,6 +1,9 @@
 package com.game.Character;
 
 import com.game.Item.Fire;
+import com.game.Item.Skill;
+
+import java.util.LinkedList;
 
 /**
  * edited by AndersonKim
@@ -12,7 +15,7 @@ import com.game.Item.Fire;
  */
 public class Player extends Character{
     private Level lev;
-
+    private LinkedList<Skill> skills;
     public Player(){
         super();
         lev=new Level();
