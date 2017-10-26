@@ -1,6 +1,7 @@
 package com.game.Character;
 
 import com.game.Item.Fire;
+import com.game.Item.Gest;
 import com.game.Item.Skill;
 
 import java.util.LinkedList;
@@ -16,6 +17,7 @@ import java.util.LinkedList;
 public class Player extends Character{
     private Level lev;
     private LinkedList<Skill> skills;
+    private LinkedList<Gest> gests;
     public Player(){
         super();
         lev=new Level();
@@ -45,6 +47,28 @@ public class Player extends Character{
      */
     public void getBasicInfo(){
         System.out.println("玩家现在的评级："+lev.getName()+"|经验池："+lev.getExpPool()+"/"+lev.getExpLimit());
+    }
+
+    /**
+     * 装备功法
+     * @param gest
+     */
+    public String equipGest(Gest gest){
+        if (gests.contains(gest)){
+            return "已经装备了同样的功法";
+        }else {
+            gests.add(gest);
+            updateCharacterParams();
+            return gest.getName()+"功法装备成功";
+        }
+    }
+
+    /**
+     * 根据玩家的当前状态来更新基础属性
+     * todo 根据玩家的属性(CharacterParams)来决定功法(Gest)怎么搞
+     */
+    private void updateCharacterParams(){
+
     }
 
     @Override
