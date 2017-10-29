@@ -4,32 +4,43 @@ package com.game.Character;
  * by SwallowJoe
  *
  */
-public class Character {
+public class Character implements Runnable{
 
     public String TAG="Character";
 
-    //The name of this character
-    protected String mName;
-    //The name of this character's type
-    private TypeName mTypeName;
-
     private CharacterParams mParams;
 
-    //Please add more
-    public enum TypeName{
-        Default,
-        Player,
-        NPC
-    };
-    public Character(){
-        mName="default";
-        mTypeName=TypeName.Default;
-        this.mParams=new CharacterParams();
+    public Character(String name){
+        mParams=new CharacterParams.Builder(name).maxHp(10000).rateOfRenewHp(0.01).build();
+        System.out.println("角色："+mParams.getName()+"出生了。");
+        mParams.setCurrentHp(10);
     }
 
     public Character(CharacterParams params){
-        mName="default";
-        mTypeName=TypeName.Default;
         this.mParams=params;
+    }
+
+    @Override
+    public void run() {
+        synchronized (this){
+            while(true){
+                try{
+                    Thread.sleep(CharacterParams.ADD_ONETIME);
+                    renewOneTime();
+                }catch (Exception e){
+
+                }
+            }
+        }
+    }
+
+    private void renewOneTime(){
+        if(isAllowRenew()){
+            mParams.addOneTime();
+        }
+    }
+
+    private boolean isAllowRenew(){
+        return mParams.getState().isAllowRenew();
     }
 }

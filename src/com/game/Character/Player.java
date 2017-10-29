@@ -19,7 +19,7 @@ public class Player extends Character{
     private LinkedList<Skill> skills;
     private LinkedList<Gest> gests;
     public Player(){
-        super();
+        super("default");
         lev=new Level();
     }
 
