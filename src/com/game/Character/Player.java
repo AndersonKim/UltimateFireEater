@@ -64,7 +64,7 @@ public class Player extends Character{
     }
 
     /**
-     * 运行功法吸收的经验值
+     * 运行功法吸收的经验值（同时也要取决于修炼所处的环境）
      * @param timeSpan 修炼的时间长度
      */
     public void runGest(int timeSpan){
