@@ -20,6 +20,13 @@ public class Skill extends GestLevel{
     //特殊技能
     String specialAttack;
 
+    public Skill() {
+    }
+
+    public Skill(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

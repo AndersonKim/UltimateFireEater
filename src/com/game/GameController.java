@@ -4,6 +4,11 @@ import com.game.Character.Character;
 import com.game.Item.Fire;
 import com.game.Character.Player;
 import com.game.Item.RankStone;
+import com.game.Item.Skill;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * edited by AndersonKim
@@ -15,26 +20,27 @@ import com.game.Item.RankStone;
  */
 public class GameController {
     public static void main(String[] args){
-        Fire f=new Fire();
-        f.setFire();
-        Player p=new Player();
 
-        p.getBasicInfo();
-
-        System.out.println("使用一团基础火焰:"+f.getName()+"|"+f.getNote());
-        p.eatFire(f);
-        System.out.println("验魔石碑:"+RankStone.testRank(p));
-        p.getBasicInfo();
-
-        System.out.println("接着使用300团基础火焰:"+f.getName()+"|"+f.getNote());
-        for (int i=0;i<300;i++){
-            Fire a=new Fire();
-            p.eatFire(a);
-        }
-        System.out.println("验魔石碑:"+RankStone.testRank(p));
-        p.getBasicInfo();
-
-        Character character=new Character("萧炎");
-        character.run();
+//        Fire f=new Fire();
+//        f.setFire();
+//        Player p=new Player();
+//
+//        p.getBasicInfo();
+//
+//        System.out.println("使用一团基础火焰:"+f.getName()+"|"+f.getNote());
+//        p.eatFire(f);
+//        System.out.println("验魔石碑:"+RankStone.testRank(p));
+//        p.getBasicInfo();
+//
+//        System.out.println("接着使用300团基础火焰:"+f.getName()+"|"+f.getNote());
+//        for (int i=0;i<300;i++){
+//            Fire a=new Fire();
+//            p.eatFire(a);
+//        }
+//        System.out.println("验魔石碑:"+RankStone.testRank(p));
+//        p.getBasicInfo();
+//
+//        Character character=new Character("萧炎");
+//        character.run();
     }
 }
