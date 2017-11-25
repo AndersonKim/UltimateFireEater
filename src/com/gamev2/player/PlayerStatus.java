@@ -11,4 +11,5 @@ package com.gamev2.player;
  */
 abstract public class PlayerStatus {
     public abstract void printStatus();
+    public abstract int countEXP(int exp);
 }
