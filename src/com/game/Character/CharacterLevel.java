@@ -116,7 +116,7 @@ public class CharacterLevel {
 
     /**
      * 获取角色下次升级所需的经验
-     * @param level 角色当前等级,至少大于1
+     * @param level 角色当前等级,至少大于0
      * @return 经验点
      */
     public static int getExpNeededWhenNextLevelUp(int level) {
