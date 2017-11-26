@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class GameController {
     public static void main(String[] args){
-
 //        Fire f=new Fire();
 //        f.setFire();
 //        Player p=new Player();
@@ -40,7 +39,8 @@ public class GameController {
 //        System.out.println("验魔石碑:"+RankStone.testRank(p));
 //        p.getBasicInfo();
 //
-//        Character character=new Character("萧炎");
-//        character.run();
+        Character character=new Character("萧炎");
+        character.prinlnParams();
+        character.run();
     }
 }
