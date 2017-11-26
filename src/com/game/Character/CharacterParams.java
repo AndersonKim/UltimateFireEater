@@ -1,11 +1,12 @@
 package com.game.Character;
 
 public class CharacterParams {
-    public static final int ADD_ONETIME=1*1000;// 1s
 
-    private static final int DEFAULT_MAXHP=100;
-    private static final int DEFAULT_MAXMP=30;
-    private static final int DEFAULT_MAXSP=0;
+    public static final int ADD_ONETIME = 1 * 1000;// 1s
+
+    private static final int DEFAULT_MAXHP = 100;
+    private static final int DEFAULT_MAXMP = 30;
+    private static final int DEFAULT_MAXSP = 0;
 
     private Coefficient coefficient;//系数
 
@@ -29,12 +30,16 @@ public class CharacterParams {
     private String name;
 
     //角色属性
-    private int strength=10;//力道,决定物理攻击力/防御力,physicalATK/DEF
-    private int dexterity=10;//敏捷,决定闪避值,dodgeRate
-    private int vitality=10;//根骨,决定最大生命值上限/血量回复速率，maxHp/renewHp
-    private int insight=10;//洞察,决定命中率,hitRate
-    private int soul=5;//魂力,决定魔法攻击力/防御力,manaATK/DEF
-    private int spirit=5;//精神,决定魔法值上限/魔量回复速率,maxMp/renewMp
+    private int strength = 10;//力道,决定物理攻击力/防御力,physicalATK/DEF
+    private int dexterity = 10;//敏捷,决定闪避值,dodgeRate
+    private int vitality = 10;//根骨,决定最大生命值上限/血量回复速率，maxHp/renewHp
+    private int insight = 10;//洞察,决定命中率,hitRate
+    private int soul = 5;//魂力,决定魔法攻击力/防御力,manaATK/DEF
+    private int spirit = 5;//精神,决定魔法值上限/魔量回复速率,maxMp/renewMp
+
+    //可分配的角色属性
+    //默认给个5点吧，可怜下新手
+    private int attributePoint = 5;
 
     //角色战斗属性
     private int physicalATK;//物理攻击力
@@ -42,14 +47,38 @@ public class CharacterParams {
     private int manaATK;//魔法攻击力
     private int manaDEF;//魔法防御力
 
-    private double hitRate=1;//命中率
-    private double dodgeRate=0.233;//闪避率
+    private double hitRate = 1;//命中率
+    private double dodgeRate = 0.233;//闪避率
 
-    private double criticalRate=0.00001;//暴击率
+    private double criticalRate = 0.00001;//暴击率
 
     //恢复速率
     private int renewHp;
     private int renewMp;
+
+    private CharacterState state;
+
+    public CharacterState getState() {
+        return state;
+    }
+
+    private CharacterParams(Builder builder) {
+        //执行顺序很重要
+        coefficient = new Coefficient();
+        //设置战斗属性
+        setAttribute();
+
+        name = builder.name;
+        renewHp = builder.renewHp;
+        maxHp = builder.maxHp;
+        maxMp = builder.maxMp;
+        maxSp = builder.maxSp;
+
+        currentHp = maxHp;
+        currentMp = maxMp;
+        currentSp = maxSp;
+        state = new CharacterState();
+    }
 
     private void setAttribute() {
         physicalATK = (int) (coefficient.getCoePhysicalATK() * strength);
@@ -67,38 +96,31 @@ public class CharacterParams {
         renewHp = (int) (coefficient.getCoeRenewHp() * vitality);
         renewMp = (int) (coefficient.getCoeRenewMp() * spirit);
     }
-    private CharacterState state;
-    public CharacterState getState() {
-        return state;
+
+    public void levelUp(){
+        addAttributePoint(CharacterLevel.getAttributeWhenLevelUp());
     }
 
-    private CharacterParams(Builder builder){
-        //执行顺序很重要
-        coefficient=new Coefficient();
-        //设置战斗属性
-        setAttribute();
-
-        name=builder.name;
-        renewHp=builder.renewHp;
-        maxHp=builder.maxHp;
-        maxMp=builder.maxMp;
-        maxSp=builder.maxSp;
-
-        currentHp=maxHp;
-        currentMp=maxMp;
-        currentSp=maxSp;
-        state=new CharacterState();
+    public void addAttributePoint(int attributePoint) {
+        synchronized (this) {
+            addAttributePointLocked(attributePoint);
+        }
     }
 
-    public void addOneTime(){
-        if(currentHp<maxHp){
-            currentHp+=renewHp;
-            if(currentHp>maxHp) {
-                currentHp=maxHp;
+    private void addAttributePointLocked(int attributePoint) {
+        this.attributePoint += attributePoint;
+        System.out.println("\t" + name + " 获得 " + attributePoint + "属性点！");
+    }
+
+    public void addOneTime() {
+        if (currentHp < maxHp) {
+            currentHp += renewHp;
+            if (currentHp > maxHp) {
+                currentHp = maxHp;
             }
-            System.out.println("角色："+name+"回血了。\t目前血量: "+currentHp);
-        }else{
-            System.out.println("角色："+name+"满血了。");
+            System.out.println("角色：" + name + "回血了。\t目前血量: " + currentHp);
+        } else {
+            System.out.println("角色：" + name + "满血了。");
         }
     }
 
@@ -127,70 +149,54 @@ public class CharacterParams {
     }
 
     //Builder pattern
-    public static class Builder{
+    public static class Builder {
         //可选参数（默认初始化）
         private int maxHp = DEFAULT_MAXHP;
         private int maxMp = DEFAULT_MAXMP;
         private int maxSp = DEFAULT_MAXSP;
 
-        private int currentHp=maxHp;
-        private int currentMp=maxMp;
-        private int currentSp=maxSp;
+        private int currentHp = maxHp;
+        private int currentMp = maxMp;
+        private int currentSp = maxSp;
         //恢复速率
-        private int renewHp=2;
+        private int renewHp = 2;
 
         //必需参数
         private String name;//角色名称
 
         //构造函数
-        public Builder(String name){
-            this.name=name;
+        public Builder(String name) {
+            this.name = name;
         }
 
-        public Builder maxHp(int val){
-            maxHp=val;
+        public Builder maxHp(int val) {
+            maxHp = val;
             return this;
         }
 
-        public Builder maxMp(int val){
-            maxMp=val;
+        public Builder maxMp(int val) {
+            maxMp = val;
             return this;
         }
 
-        public Builder maxSp(int val){
-            maxSp=val;
+        public Builder maxSp(int val) {
+            maxSp = val;
             return this;
         }
 
-        public Builder renewHp(int val){
-            renewHp=val;
+        public Builder renewHp(int val) {
+            renewHp = val;
             return this;
         }
 
-        public CharacterParams build(){
+        public CharacterParams build() {
             return new CharacterParams(this);
         }
     }
 
-    //输出角色面板
-    public void printParams(boolean isAttcking){
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("                         角色面板                              ");
-        System.out.println(" 姓名："+name);
-        System.out.println(" 力道："+Integer.toString(strength)+"\t敏捷："+Integer.toString(dexterity));
-        System.out.println(" 根骨："+Integer.toString(vitality)+"\t洞察："+Integer.toString(insight));
-        System.out.println(" 魂力："+Integer.toString(soul)+"\t精神："+Integer.toString(spirit));
-        System.out.println("--------------------------------------------------------------");
-        System.out.println(" 气血："+Integer.toString(currentHp)+"/"+Integer.toString(maxHp));
-        System.out.println(" 膜量："+Integer.toString(currentMp)+"/"+Integer.toString(maxMp));
-        System.out.println("--------------------------------------------------------------");
-        System.out.println(" 物理攻击力："+Integer.toString(physicalATK)+"\t物理防御力："+Integer.toString(physicalDEF));
-        System.out.println(" 膜法攻击力："+Integer.toString(manaATK)+"\t膜法防御力："+Integer.toString(manaDEF));
-        System.out.println(" 命中率："+Double.toString(hitRate*100)+"%\t闪避率："+Double.toString(dodgeRate*100)+"%");
-        System.out.println(" 会心率："+Double.toString(criticalRate*100)+"%\t会心伤害："+Double.toString(100)+"%");
-        System.out.println("--------------------------------------------------------------");
-    }
-
+    /**
+     * 非常重要的参数类，这个类的属性决定了该角色的基本路线
+     */
     public class Coefficient {
         private double coePhysicalATK = 2.0;
         private double coePhysicalDEF = 1.2;
@@ -244,5 +250,89 @@ public class CharacterParams {
             return coeRenewMp;
         }
 
+    }
+
+    public int getMaxMp() {
+        return maxMp;
+    }
+
+    public int getMaxSp() {
+        return maxSp;
+    }
+
+    public int getCurrentMaxHp() {
+        return currentMaxHp;
+    }
+
+    public int getCurrentMaxMp() {
+        return currentMaxMp;
+    }
+
+    public int getCurrentMaxSp() {
+        return currentMaxSp;
+    }
+
+    public int getCurrentMp() {
+        return currentMp;
+    }
+
+    public int getCurrentSp() {
+        return currentSp;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public int getDexterity() {
+        return dexterity;
+    }
+
+    public int getVitality() {
+        return vitality;
+    }
+
+    public int getInsight() {
+        return insight;
+    }
+
+    public int getSoul() {
+        return soul;
+    }
+
+    public int getSpirit() {
+        return spirit;
+    }
+
+    public int getAttributePoint() {
+        return attributePoint;
+    }
+
+    public int getPhysicalATK() {
+        return physicalATK;
+    }
+
+    public int getPhysicalDEF() {
+        return physicalDEF;
+    }
+
+    public int getManaATK() {
+        return manaATK;
+    }
+
+    public int getManaDEF() {
+        return manaDEF;
+    }
+
+    public double getHitRate() {
+        return hitRate;
+    }
+
+    public double getDodgeRate() {
+        return dodgeRate;
+    }
+
+    public double getCriticalRate() {
+        return criticalRate;
     }
 }

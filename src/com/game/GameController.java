@@ -40,7 +40,12 @@ public class GameController {
 //        p.getBasicInfo();
 //
         Character character=new Character("萧炎");
-        character.prinlnParams();
-        character.run();
+        character.printlnInfo(false);
+        character.addExp(500);
+        try{
+            Thread.sleep(1);
+        }catch (Exception e){}
+        character.printlnInfo(false);
+        //character.run();
     }
 }
