@@ -1,5 +1,7 @@
 package com.game.Character;
 
+import com.game.Item.Container;
+
 /**
  * by SwallowJoe
  *
@@ -10,6 +12,12 @@ public class Character implements Runnable {
 
     private CharacterParams mParams;
     private CharacterLevel mLevel;
+
+    private Container mBackpack;//人物背包
+    private static final String mBackpackName="背包";
+    private static final int mBackpackSize=30;//默认背包空间为30格
+
+    private String bgStory;//背景故事？？
 
     private LevelListener levelListener=new LevelListener() {
         @Override
@@ -23,14 +31,20 @@ public class Character implements Runnable {
 
     public Character(String name) {
         mParams = new CharacterParams.Builder(name).maxHp(10000).renewHp(20).build();
-        mLevel=new CharacterLevel(levelListener);
         System.out.println("角色：" + mParams.getName() + "出生了。");
         mParams.setCurrentHp(10);
+
+        initialize();
     }
 
     public Character(CharacterParams params) {
         this.mParams = params;
+        initialize();
+    }
+
+    private void initialize(){
         mLevel=new CharacterLevel(levelListener);
+        mBackpack=new Container(mBackpackName,mBackpackSize);
     }
 
     public void addExp(int exp){

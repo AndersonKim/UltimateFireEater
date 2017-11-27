@@ -70,9 +70,9 @@ public class CharacterLevel {
     }
     private void waitForAllNotified(){
         try{
-            //休眠0.01s，等待通知执行，必需
+            //休眠0.03s，等待通知执行，必需
             //否则会导致属性点延迟加点，这一块应该是加锁问题，待优化（其实现在还可以）
-            Thread.sleep(10);
+            Thread.sleep(30);
         }catch (Exception e){}
     }
     /**
