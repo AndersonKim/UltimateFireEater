@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * contain weather and players
  * when weather changed players behavior will different
  */
+//todo make player can aware of weather's change
 public class GameSpace {
     Weather weather;
     ArrayList<Player> players=new ArrayList<Player>();
