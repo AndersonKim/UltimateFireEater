@@ -1,17 +1,17 @@
-package com.gamev2.player;
+package com.gamev2.player.status;
 
 /**
  * edited by AndersonKim
  * at 2017/11/7
  */
-public class Exercise extends PlayerStatus {
+public class Rest extends PlayerStatus {
     @Override
     public void printStatus() {
-        System.out.println("player in exercise mod");
+        System.out.println("player in rest mod");
     }
 
     @Override
     public int countEXP(int exp) {
-        return exp*1;
+        return exp*0;
     }
 }
