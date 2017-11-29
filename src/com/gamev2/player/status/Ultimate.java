@@ -1,4 +1,4 @@
-package com.gamev2.player;
+package com.gamev2.player.status;
 
 /**
  * edited by AndersonKim

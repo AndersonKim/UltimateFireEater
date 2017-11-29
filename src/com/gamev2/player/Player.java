@@ -1,6 +1,11 @@
 package com.gamev2.player;
 
 import com.gamev2.overseas.weather.Weather;
+import com.gamev2.player.status.PlayerStatus;
+import com.gamev2.player.status.Rest;
+import com.gamev2.player.status.Ultimate;
+import com.gamev2.player.type.GameManager;
+import com.gamev2.player.type.PlayerType;
 import org.junit.Test;
 
 import java.util.Observable;
