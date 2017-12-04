@@ -25,3 +25,8 @@ Command center
     +----probe
     |
     +----mother ship core
+
+
+
+   1.different divide principle will have different abstract fatory
+   2.GM could controll each unit will the unit action
