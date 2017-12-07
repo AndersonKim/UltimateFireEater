@@ -10,10 +10,10 @@ import java.util.List;
  * at 2017/12/7
  */
 abstract class Order {
-    OrderLine lnkOrderLine;
-    String customerName;
-    Date salesDate;
-    List<OrderLine> items = new ArrayList();
+    private OrderLine lnkOrderLine;
+    protected String customerName;
+    protected Date salesDate;
+    protected static List<OrderLine> items = new ArrayList<OrderLine>();
 
     public void print() {
         for (OrderLine obj : items) {
@@ -34,11 +34,11 @@ abstract class Order {
     }
 
     public void addItem(OrderLine item) {
-        items.add(item);
+        this.items.add(item);
     }
 
     public void removeItem(OrderLine item) {
-        items.remove(item);
+        this.items.remove(item);
     }
 
     public OrderLine getLnkOrderLine() {
@@ -72,4 +72,5 @@ abstract class Order {
     public void setItems(List items) {
         this.items = items;
     }
+
 }
